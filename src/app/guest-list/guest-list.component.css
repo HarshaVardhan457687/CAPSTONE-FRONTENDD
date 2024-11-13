@@ -1,0 +1,75 @@
+.header-wrapper {
+    padding: 12px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+.left-section {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.status-text {
+    color: #ff9800;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.action-button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #2196f3;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.action-button:disabled {
+    background-color: #b0bec5;
+    cursor: not-allowed;
+}
+
+.dietary-preference {
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.icon-button .icon-img {
+    height: 22px;
+    width: 22px;
+}
+
+.icon-button:hover .icon-img {
+    opacity: 0.7;
+}

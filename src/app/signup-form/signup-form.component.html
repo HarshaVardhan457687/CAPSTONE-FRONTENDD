@@ -1,0 +1,50 @@
+<div class="modal">
+    <button class="close-btn" (click)="closeModal.emit()">&times;</button>
+    <h2 class="modal-title">Create Your Account</h2>
+    
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="signupName">Full Name</label>
+        <input 
+          type="text" 
+          id="signupName" 
+          formControlName="name"
+          [class.error]="signupForm.get('name')?.invalid && signupForm.get('name')?.touched"
+        >
+        <div class="error-message" *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched">
+          Name is required
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="signupEmail">Email</label>
+        <input 
+          type="email" 
+          id="signupEmail" 
+          formControlName="email"
+          [class.error]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+        >
+        <div class="error-message" *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+          Please enter a valid email
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="signupPassword">Password</label>
+        <input 
+          type="password" 
+          id="signupPassword" 
+          formControlName="password"
+          [class.error]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
+        >
+        <div class="error-message" *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+          Password must be at least 6 characters long
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary modal-btn" [disabled]="signupForm.invalid">
+        Sign up
+      </button>
+    </form>
+  </div>
+  

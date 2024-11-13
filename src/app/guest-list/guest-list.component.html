@@ -1,0 +1,22 @@
+<div class="header-wrapper">
+    <div class="header-container">
+        <div class="left-section">
+            <span class="label-text">Guest: John Doe</span>
+        </div>
+    
+        <div class="right-section">
+            <button class="action-button" [disabled]="rsvpSent" (click)="sendRsvp()">Send RSVP</button>
+            <button class="action-button" (click)="sendReminders()">Send Reminders</button>
+            <div class="dietary-preference">
+                <label>Dietary Preference:</label>
+                <span>Vegetarian</span>
+            </div>
+            <button class="icon-button edit">
+                <img src="assets/edit-grey.png" alt="Edit" class="icon-img">
+            </button>
+            <button class="icon-button delete">
+                <img src="assets/delete-grey.png" alt="Delete" class="icon-img">
+            </button>
+        </div>
+    </div>
+</div>

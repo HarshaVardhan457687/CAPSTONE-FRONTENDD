@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="content">
+    <h1 class="title">Welcome to <span>Our Platform</span></h1>
+    <p class="description">
+      Join thousands of users who trust our platform for their daily needs. 
+      Start your journey today.
+    </p>
+    <div class="button-container">
+      <button class="btn btn-primary" (click)="openLogin()">Login</button>
+      <button class="btn btn-outline" (click)="openSignup()">Sign up</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" [class.active]="showLogin || showSignup" (click)="closeModals()"></div>
+
+<app-login-form *ngIf="showLogin" (closeModal)="closeModals()"></app-login-form>
+<app-signup-form *ngIf="showSignup" (closeModal)="closeModals()"></app-signup-form>
+
+
+

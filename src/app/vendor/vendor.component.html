@@ -1,0 +1,32 @@
+<div class="vendor-page-container">
+    <h1>Vendors</h1>
+
+    <input 
+      type="text" 
+      placeholder="Search by vendor name..." 
+      [(ngModel)]="searchTerm" 
+      (input)="onSearchChange()" 
+      class="search-bar"
+    />
+
+    <select [(ngModel)]="selectedType" (change)="onTypeChange()" class="filter-dropdown">
+      <option value="">All Types</option>
+      <option value="Catering">Catering</option>
+      <option value="Venue">Venue</option>
+      <option value="Decor">Decor</option>
+      <option value="Photography">Photography</option>
+      <option value="Entertainment">Entertainment</option>
+    </select> 
+
+    <div class="cards">
+        <div class="vendor-card" *ngFor="let vendor of filteredVendors">
+            <h2>{{ vendor.name }}</h2>
+            <p><strong>Type:</strong> {{ vendor.type }}</p>
+            <p><strong>Contact:</strong> {{ vendor.contactDetails }}</p>
+            <p><strong>Remaining Amount:</strong> ${{ vendor.remainingAmount }}</p>
+            <p><strong>Amount Paid:</strong> ${{ vendor.amountPaid }}</p>
+          </div>
+    </div>
+
+  </div>
+  

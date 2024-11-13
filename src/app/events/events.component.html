@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="header"> 
+        <div class="header-left"> 
+            <h1>Events</h1> 
+            <button (click)="openForm()" class="add-event-btn"> + Add Event</button>
+        </div>  
+        <div class="header-right">
+            <input type="text" placeholder="Search Events" #filter class="search-bar">
+            <button class="search-btn" type="button" (click)="onClickSearch()">Search</button>
+        </div>
+    </div>  
+    <div class="content"> 
+        <div *ngFor="let i of num" class="cards"><app-event-card></app-event-card></div>
+    </div>
+
+</div> 
+<app-add-event-form *ngIf="showForm" (close)="closeForm()"></app-add-event-form>

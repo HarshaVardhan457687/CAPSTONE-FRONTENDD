@@ -1,0 +1,53 @@
+.left-panel {
+    padding: 20px; /* Provides space from the edge */
+    background-color: #f8faff;
+    width: 250px;
+  }
+  
+  .add-task-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .add-task-btn:hover {
+    transform: scale(1.05);
+  }
+  
+  .task-options {
+    margin-top: 20px;
+  }
+  
+  .task-options p {
+    margin: 8px 0;
+    color: #333;
+  }
+  
+  h3 {
+    margin-top: 15px;
+    font-size: 1rem;
+    color: #007bff;
+  }
+  
+  .count {
+    float: right;
+    color: #777;
+  }
+  
+  .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 10px;
+  }
+  
+  .frontend { background-color: blue; }
+  .backend { background-color: green; }
+  .issue { background-color: yellow; }
+  .design { background-color: cyan; }
+  

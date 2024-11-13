@@ -1,0 +1,116 @@
+.container{ 
+    background-color: rgb(234, 247, 252); 
+    height: 100vh;
+    width: 87vw; 
+    display: flex; 
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+} 
+.header{  
+    margin-top: 100px; 
+    margin-left: 50px;  
+    height: 100%; 
+    width: 100%;
+    display: flex; 
+    justify-content: space-between;  
+} 
+.header-left h1{ 
+    color: #1e293b;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+.header-left button{ 
+    background-color: rgb(2, 167, 233); 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 5px; 
+    font-weight: 600;
+    height: 40px;  
+    width: 150px;  
+    font-size: 14px;
+}
+.header-left button:hover{
+    background-color: rgb(138, 191, 211);
+}    
+.add-event-btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: 600;
+    height: 44px;
+    width: auto;
+    font-size: 14px;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);  
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+      }
+  
+      &:active {
+        transform: translateY(1px);
+      }
+  }
+
+  .add-event-btn:hover {
+    background-color: #3182ce;
+  }
+.header-right{   
+    margin-top: 40px; 
+    margin-right: 100px;
+} 
+.search-bar {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    outline: none;
+    transition: border-color 0.2s; 
+    width: 250px;
+  }
+
+  .search-bar:focus {
+    border-color: #4299e1;
+  } 
+
+.search-btn {
+    background-color: #4299e1;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-top-right-radius: 5px; 
+    border-bottom-right-radius: 5px; 
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .search-btn:hover {
+    background-color: #3182ce;
+  }
+.content{ 
+    display: flex; 
+    flex-wrap: wrap; 
+    margin-left: 30px; 
+    margin-top: 30px;
+}
+.cards {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s; 
+    margin: 10px;
+}
+
+.cards:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}

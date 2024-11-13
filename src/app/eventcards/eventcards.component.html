@@ -1,0 +1,50 @@
+<div class="container-card">
+    <div class="header">
+        <h3>Location</h3> 
+        <button class="menu-btn" (click)="toggleDropdown()">...</button>  
+    </div> 
+    <div class="container-event-holder"> 
+        <div class="container-event-holder-main"> 
+            <div class="desc">  
+                <h1>{{ item.Eventname }}</h1> 
+                <p>{{ item.description }}</p> 
+            </div>
+
+            <div class="date-notification"> 
+                <div class="date-div"> 
+                    <p>23/12/2020 - 11:23</p> 
+                    <p>25/12/2024 - 23:43</p>
+                </div>  
+                <div class="event-noti">  
+                    <div class="task-counter">
+                        <img src="assets/doubletick-grey.png" alt="" class="doubletick">
+                        <p>3/4</p>
+                    </div>  
+                    <div class="notification-div"> 
+                        <img src="assets/chat-grey.png" alt="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>  
+    <div class="task-btn">
+        <button class="newTask" (click)="openForm()">+ Add New Task</button>
+    </div>  
+    <div *ngIf="dropdownVisible" class="dropdown-menu">
+        <ul>
+            <li (click)="updateItem()">Update</li>
+            <li (click)="deleteItem()">Delete</li>
+            <li>
+                Status
+                <ul class="status-dropdown">
+                    <li (click)="setStatus('complete')">Complete</li>
+                    <li (click)="setStatus('inProgress')">In Progress</li>
+                    <li (click)="setStatus('upcoming')">Upcoming</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>   
+
+<app-addtask *ngIf="showForm" (close)="closeForm()"></app-addtask>

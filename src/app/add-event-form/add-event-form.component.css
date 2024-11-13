@@ -1,0 +1,149 @@
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: 1000; 
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  width: 60%;
+  margin: 60px auto;
+  padding: 40px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: white;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  z-index: 1001; 
+  }
+
+  .form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .form-header h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+  } 
+
+  .close-btn img{   
+    height: 30px; 
+    width: 30px;
+  }
+  
+  .top-line {
+    border: 0;
+    height: 1px;
+    background-color: #ccc;
+    margin: 10px 0;
+  }
+  
+
+  .form-group {
+    margin-bottom: 15px;
+  } 
+
+  
+  .form-group label {
+    display: inline-block;
+    font-size: 12px;
+    margin-bottom: 5px; 
+    font-weight: bold; 
+    color: #555;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+  } 
+
+  input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus {
+  border-color: rgb(2, 167, 233); 
+  outline: none;
+}
+  
+
+  .date-time {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .date-time .form-group {
+    width: 30%;
+  }
+  
+
+  .search-box {
+    position: relative;
+  }
+  
+  .search-box input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(2, 167, 233);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background-color: rgb(138, 191, 211);
+  } 
+
+  @media (max-width: 600px) {
+    .form-task {
+      width: 90%;
+      padding: 20px;
+    }
+  
+    .form-row {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  
