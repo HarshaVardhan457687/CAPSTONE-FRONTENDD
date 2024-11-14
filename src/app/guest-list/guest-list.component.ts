@@ -8,18 +8,16 @@ import { Component } from '@angular/core';
 export class GuestListComponent { 
   guestName: string = 'John Doe';
   dietaryPreference: string = 'Vegetarian';
-  rsvpSent: boolean = false; // Tracks whether RSVP has been sent
+  rsvpSent: boolean = false; 
 
-  // Method to send RSVP, disables the button once sent
   sendRsvp() {
     if (!this.rsvpSent) {
       this.rsvpSent = true;
-      // Logic to handle sending RSVP
       console.log("RSVP sent for:", this.guestName);
     }
   }
 
-  // Method to send reminders, can be triggered multiple times
+
   sendReminders() {
     // Logic to handle sending reminders
     console.log("Reminders sent to:", this.guestName);

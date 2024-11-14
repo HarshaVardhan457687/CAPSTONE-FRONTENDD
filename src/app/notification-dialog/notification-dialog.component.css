@@ -1,0 +1,56 @@
+.mat-dialog-container {
+    width: 300px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
+  
+  .dialog-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .dialog-content {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  .icon-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  
+  .success-icon {
+    color: #4caf50; /* Green for success */
+    font-size: 40px;
+  }
+  
+  .error-icon {
+    color: #f44336; /* Red for error */
+    font-size: 40px;
+  }
+  
+  .dialog-actions {
+    display: flex;
+    justify-content: center;
+  }
+  
+  button.close-btn {
+    padding: 8px 20px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  
+  button.close-btn:hover {
+    background-color: #155b8a;
+  }
+  

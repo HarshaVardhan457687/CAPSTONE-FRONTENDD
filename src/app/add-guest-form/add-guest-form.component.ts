@@ -1,21 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Guest } from './Guest';
+import { GuestServiceService } from '../guest-service.service';
+import { NotificationDialogComponent } from '../notification-dialog/notification-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-guest-form',
   templateUrl: './add-guest-form.component.html',
   styleUrls: ['./add-guest-form.component.css']
 })
-export class AddGuestFormComponent {
+export class AddGuestFormComponent { 
+
+  @Output() close = new EventEmitter<void>();  
+  @Output() formOpen = new EventEmitter<boolean>(); 
+  isSubmitting = false 
+
+  constructor(private guestService: GuestServiceService, private dialog: MatDialog){
+
+  } 
+  dietaryPreference: number = 0;
+
+  ngOnInit() {
+    this.formOpen.emit(true); 
+  }
+
+  closeForm() {
+    this.close.emit();
+  } 
   guest = {
     name: '',
     email: '',
     event: '',
-    food: 'veg',
-    place: ''
+    food: '',    
   };
-  eventOptions = ['Wedding', 'Birthday', 'Conference'];
-  placeOptions = ['Hall 1', 'Hall 2', 'Outdoor'];
-  foodIndicatorClass = 'veg-indicator';  // Default to veg indicator
+  eventOptions = ['corporate'];
+  foodIndicatorClass = 'veg-indicator';   
+  
 
   validateName(event: any) {
     const regex = /^[A-Za-z\s]+$/;
@@ -27,12 +48,42 @@ export class AddGuestFormComponent {
   }
 
   updateFoodType() {
-    this.foodIndicatorClass = this.guest.food === 'veg' ? 'veg-indicator' : 'nonveg-indicator';
+    this.dietaryPreference = this.guest.food === 'VEG' ? 0 : 1;
   }
 
-  onSubmit() {
-    if (this.guest.name && this.guest.email && this.guest.event && this.guest.food && this.guest.place) {
-      console.log('Guest Created:', this.guest);
-    }
+  validateForm(form: NgForm): boolean{ 
+    return true;
   }
+
+  onSubmit(form: NgForm) {
+      if (this.validateForm(form)) {
+        const newGuest = new Guest(
+          null, this.guest.name, this.guest.email, this.dietaryPreference, 0, this.guest.event
+        ) 
+        this.isSubmitting = true;
+        this.guestService.saveGuest(newGuest).subscribe({
+          next: (response) => {
+            this.isSubmitting = false;
+            this.openDialog('Guest saved successfully!', true); 
+            console.log(response)
+          },
+          error: (err) => {
+            this.isSubmitting = false;
+            this.openDialog('Failed to save the Guest. Please try again later.', false);
+            console.error(err);
+          } 
+        }); 
+        this.closeForm();
+      }  
+  
+  
+    } 
+    openDialog(message: string, success: boolean): void {
+      this.dialog.open(NotificationDialogComponent, {
+        data: {
+          message: message,
+          success: success
+        }
+      });
+    }
 }

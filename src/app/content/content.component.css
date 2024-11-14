@@ -1,16 +1,25 @@
 .side-navbar{ 
-    width: 200px;   
+    width: 170px;   
     background-color: #002d42;   
     height: 100vh; 
-    z-index: 1000;
-} 
-.main-content{  
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
+    z-index: 1000; 
+    position: fixed; 
+    top: 0;
 
 } 
-.container{ 
-    display: flex;
-    align-items: center;
+.top-navbar{ 
+    position: fixed; 
+    top: 0; 
+    left: 180px; 
+    height: 55px
+}  
+.content{ 
+    margin-left: 200px;  
+    width: (100vw - 200px); 
+    margin-top: 60px; 
+    height: (100vh - 40px);
+} 
+.main-content{ 
+    display: flex; 
+    align-items: center; 
 }

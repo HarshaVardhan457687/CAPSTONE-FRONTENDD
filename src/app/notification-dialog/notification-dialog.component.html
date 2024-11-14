@@ -1,0 +1,13 @@
+<div mat-dialog-title class="dialog-title">{{ success ? 'Success' : 'Error' }}</div>
+
+<div mat-dialog-content class="dialog-content">
+  <div class="icon-container">
+    <mat-icon *ngIf="success" class="success-icon">check_circle</mat-icon>
+    <mat-icon *ngIf="!success" class="error-icon">error</mat-icon>
+  </div>
+  <p>{{ message }}</p>
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button class="close-btn" (click)="close()">Got it</button>
+</div>

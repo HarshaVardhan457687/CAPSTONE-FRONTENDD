@@ -1,0 +1,38 @@
+<div class="task-card" [class.completed]="task.isCompleted">
+    <div class="task-header">
+        <div class="left-section">
+            <div class="checkbox-wrapper">
+                <input 
+                    type="checkbox" 
+                    [checked]="task.isCompleted"
+                    (change)="toggleComplete()"
+                    id="task-{{task.id}}"
+                >
+                <label [for]="'task-'+task.id"></label>
+            </div>
+            <h3 class="task-name">{{ task.name }}</h3>
+        </div>
+        
+        <div class="right-section">
+            <div class="datetime-info">
+                <div class="time-block">
+                    <i class="far fa-clock"></i>
+                    <span>Start: {{ formatDateTime(task.startDateTime) | date:'MMM d, y, h:mm a' }}</span>
+                </div>
+                <div class="time-block">
+                    <i class="fas fa-hourglass-end"></i>
+                    <span>End: {{ formatDateTime(task.endDateTime) | date:'MMM d, y, h:mm a' }}</span>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <button class="icon-button edit" (click)="editTask()">
+                    <img src="assets/edit-grey.png" alt="Edit" class="icon-img">
+                </button>
+                <button class="icon-button delete" (click)="deleteTask()">
+                    <img src="assets/delete-grey.png" alt="Delete" class="icon-img">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

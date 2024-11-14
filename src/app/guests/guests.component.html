@@ -1,29 +1,12 @@
 <div class="container">
-    <div class="navbar">
-      <button class="add-task-button">+ Add New Guest</button>
-      <div class="menu">
-        <h3>Tasks</h3>
-        <a href="#" class="menu-item"><i class="fas fa-folder"></i> All Guests</a>
-        <a href="#" class="menu-item"><i class="fas fa-file"></i> Accepted Guests</a>
-        <a href="#" class="menu-item"><i class="fas fa-file"></i> Rejected Guests</a>
-        <a href="#" class="menu-item"><i class="fas fa-file"></i> Pending Guests</a>
-        
-        <h3>Status</h3>
-        <div class="status">
-          <div class="status-item"><i class="fas fa-spinner"></i> No response <span>23</span></div>
-          <div class="status-item"><i class="fas fa-check-circle"></i> Accepted <span>30</span></div>
-          <div class="status-item"><i class="fas fa-ban"></i> Declined <span>30</span></div>
-        </div>
-      </div>
-    </div>
-    
+    <button class="add-task-button" (click)="openForm()">+ Add New Guest</button>
     <div class="main-content">
       <div class="dropdown">
         <button (click)="toggleDropdown()" class="dropdown-button">
-          Select an Event 
+          Select an Event
           <i [class]="dropdownOpen ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
         </button>
-        
+  
         <div class="dropdown-content" *ngIf="dropdownOpen">
           <a href="#" (click)="selectOption('Option 1')">Option 1</a>
           <a href="#" (click)="selectOption('Option 2')">Option 2</a>
@@ -38,4 +21,4 @@
       </div>
     </div>
   </div>
-  
+<app-add-guest-form *ngIf="showForm" (close)="closeForm()"></app-add-guest-form>  

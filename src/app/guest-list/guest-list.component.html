@@ -9,7 +9,10 @@
             <button class="action-button" (click)="sendReminders()">Send Reminders</button>
             <div class="dietary-preference">
                 <label>Dietary Preference:</label>
-                <span>Vegetarian</span>
+                <span [ngClass]="{
+                    'vegetarian': dietaryPreference === 'Vegetarian',
+                    'non-vegetarian': dietaryPreference === 'Non-Vegetarian'
+                }">Non-Vegetarian</span>
             </div>
             <button class="icon-button edit">
                 <img src="assets/edit-grey.png" alt="Edit" class="icon-img">

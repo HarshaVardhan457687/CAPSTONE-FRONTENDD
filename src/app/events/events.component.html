@@ -10,7 +10,7 @@
         </div>
     </div>  
     <div class="content"> 
-        <div *ngFor="let i of num" class="cards"><app-event-card></app-event-card></div>
+        <app-event-card *ngFor="let eventt of events" [eventt]="eventt" class="cards"></app-event-card>
     </div>
 
 </div> 

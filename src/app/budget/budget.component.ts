@@ -13,7 +13,11 @@ export class BudgetComponent {
   }
 
   selectOption(option: string) {
-    this.dropdownOpen = false; 
+    this.dropdownOpen = false;
+    console.log('Selected Option:', option);
   }
-  onClickSearch(){} 
+
+  onClickSearch() {
+    console.log('Search clicked');
+  }
 }

@@ -1,61 +1,64 @@
-<div class="container">
+<div class="navbar-container">
     <mat-nav-list>  
         <mat-list-item class="head-list">
-            <h1 class="heading">APPLICATION</h1>
-        </mat-list-item>
-        <mat-list-item 
-        (mouseover)="onHoverAdd(true)" 
-        (mouseleave)="onHoverAdd(false)"
-        [routerLink]="['dashboard']"
-        > 
-            <div>
-                <img [src]="iconSrcAdd" alt="logo.png"> 
-                <p class="btns">Add</p>
-            </div> 
-        </mat-list-item> 
-        <mat-list-item 
-        (mouseover)="onHoverEvent(true)" 
-        (mouseleave)="onHoverEvent(false)" 
-        [routerLink]='["event"]'>
-            <div>
-                <img [src]="iconSrcEvent" alt="events.png">
-                <p class="btns">Events</p>
-            </div>
-        </mat-list-item> 
-
-        <mat-list-item
-        (mouseover)="onHoverGuest(true)" 
-        (mouseleave)="onHoverGuest(false)"
-        [routerLink]="['guest']">
-            <div>
-                <img [src]="iconSrcGuest" alt="Guests.png"> 
-                <p class="btns">Guests</p>
-            </div>
-        </mat-list-item>  
-
-
-        <mat-list-item
-        (mouseover)="onHoverBudget(true)" 
-        (mouseleave)="onHoverBudget(false)" 
-        [routerLink]="['budget']">
-            <div>
-                <img [src]="iconSrcBudget" alt="Budget.png"> 
-                <p class="btns">Budget</p>
-            </div>
-        </mat-list-item> 
-
-        <mat-list-item
-        (mouseover)="onHoverVendor(true)" 
-        (mouseleave)="onHoverVendor(false)" 
-        [routerLink]="['vendor']">
-            <div>
-                <img [src]="iconSrcVendor" alt="Vendor.png"> 
-                <p class="btns">Vendor</p>
-            </div>
+            <h1 class="heading">EVENT PLANNER</h1>
         </mat-list-item>
         
+        <mat-list-item class="nav-item"
+            (mouseover)="onHoverAdd(true)" 
+            (mouseleave)="onHoverAdd(false)"
+            [routerLink]="['dashboard']"
+        > 
+            <div class="nav-content">
+                <img [src]="iconSrcAdd" alt="add"> 
+                <p class="btns">Add Event</p>
+            </div> 
+        </mat-list-item> 
+
+        <mat-list-item class="nav-item"
+            (mouseover)="onHoverEvent(true)" 
+            (mouseleave)="onHoverEvent(false)"
+            [routerLink]="['event']"
+        > 
+            <div class="nav-content">
+                <img [src]="iconSrcEvent" alt="events"> 
+                <p class="btns">Events</p>
+            </div> 
+        </mat-list-item>
+
+        <mat-list-item class="nav-item"
+            (mouseover)="onHoverGuest(true)" 
+            (mouseleave)="onHoverGuest(false)"
+            [routerLink]="['guest']"
+        > 
+            <div class="nav-content">
+                <img [src]="iconSrcGuest" alt="guests"> 
+                <p class="btns">Guests</p>
+            </div> 
+        </mat-list-item>
+
+        <mat-divider class="nav-divider"></mat-divider>
+
+        <mat-list-item class="nav-item"
+            (mouseover)="onHoverBudget(true)" 
+            (mouseleave)="onHoverBudget(false)"
+            [routerLink]="['budget']"
+        > 
+            <div class="nav-content">
+                <img [src]="iconSrcBudget" alt="budget"> 
+                <p class="btns">Budget</p>
+            </div> 
+        </mat-list-item>
+
+        <mat-list-item class="nav-item"
+            (mouseover)="onHoverVendor(true)" 
+            (mouseleave)="onHoverVendor(false)"
+            [routerLink]="['vendor']"
+        > 
+            <div class="nav-content">
+                <img [src]="iconSrcVendor" alt="vendors"> 
+                <p class="btns">Vendors</p>
+            </div> 
+        </mat-list-item>
     </mat-nav-list>
-
-
-</div> 
-<app-add-event-form *ngIf="showForm" (close)="closeForm()"></app-add-event-form>
+</div>

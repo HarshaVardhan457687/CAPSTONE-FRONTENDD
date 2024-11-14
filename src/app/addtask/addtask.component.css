@@ -4,127 +4,267 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5); 
-  z-index: 1000; 
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1001;
+  animation: fadeIn 0.3s ease;
 }
 
 .form-task {
   display: flex;
   flex-direction: column;
-  max-width: 500px;
-  width: 60%;
+  max-width: 550px;
+  width: 65%;
   margin: 60px auto;
-  padding: 40px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  background-color: white;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  background: linear-gradient(to bottom, #ffffff, #f8fafc);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
   position: fixed;
-  top: 40%;
+  top: 45%;
   left: 50%;
-  transform: translate(-50%, -50%); 
-  z-index: 1001;
+  transform: translate(-50%, -50%);
+  z-index: 1002;
+  animation: slideIn 0.4s ease;
+
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgb(236, 232, 232);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #f1f5f9;
 }
 
 .heading {
-  font-size: 1.5rem;
-  color: #333;
+  font-size: 1.75rem;
+  color: #1e293b;
   margin: 0;
+  font-weight: 600;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .cancel {
-  background: none;
+  background: #f1f5f9;
   border: none;
-  font-size: 1.2rem;
-  color: #999;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: color 0.2s;
+  transition: all 0.3s ease;
 }
 
 .cancel:hover {
-  color: #555;
+  background: #e2e8f0;
+  transform: rotate(90deg);
+}
+
+.cancel img {
+  height: 20px;
+  width: 20px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.cancel:hover img {
+  opacity: 1;
 }
 
 .form-group {
-  margin-bottom: 16px;
+  margin-bottom: 1.5rem;
 }
 
 .form-row {
   display: flex;
-  gap: 20px;
+  justify-content: space-around;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 label {
-  font-weight: bold;
-  color: #555;
-  margin-bottom: 6px;
-  display: inline-block;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 0.5rem;
+  display: block;
+  font-size: 0.95rem;
+}
+input[type="date"],
+input[type="time"]{ 
+  width: auto;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: white;
+  color: #1e293b;
 }
 
-input[type="text"],
-input[type="date"],
-input[type="time"] {
-  width: 100%;
-  padding: 10px;
+input[type="text"]
+ {
+  width: 500px;
+  padding: 0.75rem 1rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  transition: border-color 0.2s;
-} 
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: white;
+  color: #1e293b;
+}
+
+input[type="text"]:hover,
+input[type="date"]:hover,
+input[type="time"]:hover {
+  border-color: #cbd5e1;
+}
 
 input[type="text"]:focus,
 input[type="date"]:focus,
 input[type="time"]:focus {
-  border-color: rgb(2, 167, 233); 
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   outline: none;
 }
 
 .submit {
-  background-color: rgb(2, 167, 233);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: white;
   font-size: 1rem;
-  padding: 12px;
+  font-weight: 500;
+  padding: 1rem;
   width: 100%;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  margin-top: 1rem;
 }
 
 .submit:hover {
-  background-color: rgb(138, 191, 211);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
 }
 
-.cancel,
-.submit {
-  font-size: 1rem;
-}  
-
-.cancel{ 
-  margin-bottom: 80px; 
-  margin-left: 50px;
+.submit:active {
+  transform: translateY(1px);
 }
 
-.cancel img{  
-  height: 30px; 
-  width: 30px;
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@media (max-width: 600px) {
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Custom date and time input styling */
+input[type="date"],
+input[type="time"] {
+  position: relative;
+  cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+/* Error states */
+input.ng-invalid.ng-touched {
+  border-color: #ef4444;
+}
+
+input.ng-invalid.ng-touched:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .form-task {
-    width: 90%;
-    padding: 20px;
+    width: 85%;
+    padding: 1.5rem;
   }
 
   .form-row {
     flex-direction: column;
-    gap: 10px;
+    gap: 1rem;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"] {
+    padding: 0.625rem 0.875rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .form-task {
+    background: linear-gradient(to bottom, #1e293b, #0f172a);
+    border-color: rgba(51, 65, 85, 0.8);
+  }
+
+  .heading {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    -webkit-background-clip: text;
+  }
+
+  label {
+    color: #cbd5e1;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"] {
+    background: #1e293b;
+    border-color: #334155;
+    color: #f8fafc;
+  }
+
+  input[type="text"]:hover,
+  input[type="date"]:hover,
+  input[type="time"]:hover {
+    border-color: #475569;
+  }
+
+  .cancel {
+    background: #334155;
+  }
+
+  .cancel:hover {
+    background: #475569;
   }
 }

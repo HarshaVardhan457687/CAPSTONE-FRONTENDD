@@ -1,19 +1,19 @@
 <div class="container-card">
     <div class="header">
-        <h3>Location</h3> 
+        <h3>{{ item.location }}</h3> 
         <button class="menu-btn" (click)="toggleDropdown()">...</button>  
     </div> 
     <div class="container-event-holder"> 
         <div class="container-event-holder-main"> 
             <div class="desc">  
-                <h1>{{ item.Eventname }}</h1> 
+                <h1>{{ item.name }}</h1> 
                 <p>{{ item.description }}</p> 
             </div>
 
             <div class="date-notification"> 
                 <div class="date-div"> 
-                    <p>23/12/2020 - 11:23</p> 
-                    <p>25/12/2024 - 23:43</p>
+                    <p>{{ item.startDate }}</p> 
+                    <p>{{ item.endDate }}</p>
                 </div>  
                 <div class="event-noti">  
                     <div class="task-counter">

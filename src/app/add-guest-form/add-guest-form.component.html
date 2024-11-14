@@ -1,77 +1,73 @@
-<div class="popup-form">
-    <div class="form-container">
-      <h3>Add Guest</h3>
-      <form (ngSubmit)="onSubmit()" #guestForm="ngForm">
-        <label for="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Enter name"
-          [(ngModel)]="guest.name"
-          #name="ngModel"
-          (input)="validateName($event)"
-          required
-        />
-        <div *ngIf="name.invalid && name.touched" class="error">Not applicable</div>
-  
-        <label for="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Enter email"
-          [(ngModel)]="guest.email"
-          #email="ngModel"
-          required
-        />
-        <div *ngIf="email.invalid && email.touched" class="error">Not applicable</div>
-  
-        <label for="event">Event Type:</label>
-        <select
-          id="event"
-          name="event"
-          [(ngModel)]="guest.event"
-          #event="ngModel"
-          required
-        >
-          <option value="" disabled selected>Add events</option>
-          <option *ngFor="let option of eventOptions" [value]="option">{{ option }}</option>
-        </select>
-  
-        <label for="food">Food:</label>
-        <select
-          id="food"
-          name="food"
-          [(ngModel)]="guest.food"
-          #food="ngModel"
-          (change)="updateFoodType()"
-          required
-        >
-          <option value="veg">Veg</option>
-          <option value="nonveg">Non-Veg</option>
-        </select>
-  
-        <label for="places">Places:</label>
-        <select
-          id="places"
-          name="places"
-          [(ngModel)]="guest.place"
-          #places="ngModel"
-          required
-        >
-          <option value="" disabled selected>Choose place</option>
-          <option *ngFor="let place of placeOptions" [value]="place">{{ place }}</option>
-        </select>
-  
-        <button
-          type="submit"
-          [disabled]="guestForm.invalid"
-          class="create-guest-button"
-        >
-          Create Guest
-        </button>
-      </form>
-    </div>
+<div class="modal-overlay" (click)="closeForm()"></div>
+<div class="form-container">
+  <div class="form-header">
+    <h2>Add Guest</h2>
+    <span class="close-btn" (click)="closeForm()"><img src="assets/cancel-grey.png" alt="Close"></span>
   </div>
-  
+  <hr class="top-line">
+
+  <form (ngSubmit)="onSubmit(guestForm)" #guestForm="ngForm">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Enter name"
+        [(ngModel)]="guest.name"
+        #name="ngModel"
+        (input)="validateName($event)"
+        required
+      />
+      <div *ngIf="name.invalid && name.touched" class="error-message">Not applicable</div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Enter email"
+        [(ngModel)]="guest.email"
+        #email="ngModel"
+        required
+      />
+      <div *ngIf="email.invalid && email.touched" class="error-message">Not applicable</div>
+    </div>
+
+    <div class="form-group">
+      <label for="event">Event:</label>
+      <select
+        id="event"
+        name="event"
+        [(ngModel)]="guest.event"
+        #event="ngModel"
+        required
+      >
+        <option value="" disabled selected>Add events</option>
+        <option *ngFor="let option of eventOptions" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="food">Dietary Preference:</label>
+      <select
+        id="food"
+        name="food"
+        [(ngModel)]="guest.food"
+        #food="ngModel"
+        (change)="updateFoodType()"
+        required
+      >
+        <option value="veg">Veg</option>
+        <option value="nonveg">Non-Veg</option>
+      </select>
+    </div>
+
+    
+    <div class="form-group">
+      <button type="submit" class="submit-btn" [disabled]="guestForm.invalid">Create Guest</button>
+    </div>
+  </form>
+</div>

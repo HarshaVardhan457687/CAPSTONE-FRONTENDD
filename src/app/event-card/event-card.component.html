@@ -1,39 +1,39 @@
 <div class="container">
-        <div class="header">
-            <p class="date">12/12/2012</p>
-            <button class="dot-menu" (click)="toggleMenu()">...</button>  
-            <div *ngIf="menuVisible" class="dropdown-menu">
-                <ul>
-                    <li (click)="editEvent()">Edit</li>
-                    <li (click)="deleteEvent()">Delete</li>
-                    <li>Status
-                        <ul class="status-dropdown">
-                            <li (click)="setStatus('Complete')">Complete</li>
-                            <li (click)="setStatus('In Progress')">In Progress</li>
-                            <li (click)="setStatus('Upcoming')">Upcoming</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>  
+    <div class="header">
+        <p class="date">{{ eventt.startDate }}</p>
+        <button class="dot-menu" (click)="toggleMenu()">...</button>  
+        <div *ngIf="menuVisible" class="dropdown-menu">
+            <ul>
+                <li (click)="editEvent()">Edit</li>
+                <li (click)="deleteEvent()">Delete</li> 
+                <li>Status
+                    <ul class="status-dropdown">
+                        <li (click)="setStatus('Complete')">Complete</li>
+                        <li (click)="setStatus('In Progress')">In Progress</li>
+                        <li (click)="setStatus('Upcoming')">Upcoming</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>  
         
 
-        <div class="main">
-            <h1>Event Name</h1>
-            <p>Event description goes here, giving a brief overview of the event’s purpose and highlights.</p>
+    <div class="main">
+        <h1>{{ eventt.name }}</h1>
+        <p>{{ eventt.description }}</p>
+    </div>
+    <div class="footer">
+        <div class="footer-child">
+            <img src="assets/person-grey.png" alt="">
+            <p>{{ eventt.totalGuests }}</p>
         </div>
-        <div class="footer">
-            <div class="footer-child">
-                <img src="assets/person-grey.png" alt="">
-                <p>50</p>
-            </div>
-            <div class="footer-child">
-                <img src="assets/tasks-grey.png" alt="">
-                <p>4/5</p>
-            </div>
-            <div class="footer-child">
-                <img src="assets/venue-grey.png" alt="">
-                <p>Bangalore</p>
-            </div>
-        </div>  
-    </div>   
+        <div class="footer-child">
+            <img src="assets/tasks-grey.png" alt="">
+            <p> {{ eventt.taskCompleted }} / {{ eventt.totalTask }}</p>
+        </div>
+        <div class="footer-child">
+            <img src="assets/venue-grey.png" alt="">
+            <p>{{ eventt.location }}</p>
+        </div>
+    </div>  
+</div>  

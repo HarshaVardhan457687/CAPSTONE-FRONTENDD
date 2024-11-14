@@ -1,17 +1,17 @@
 
 .container {
-  min-height: 100vh;
-  width: 85vw;
   background: linear-gradient(135deg, #f8faff 0%, #eef5ff 100%);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center;  
+  height: (100vh - 20px);  
+  width: (100vw - 200vw); 
 }
 
 .inner-container {
-  margin-top: 80px;
+  margin-top: 20px;
   height: 80%;
-  width: 93%;
+  width: 95%;
   background-color: white;
   position: relative;
   border-radius: 20px;
@@ -23,9 +23,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px 30px;
+  padding: 15px 20px; 
   background: white;
   border-bottom: 1px solid rgba(37, 99, 235, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .header-child {
@@ -41,7 +42,7 @@
     color: white;
     border: none;
     border-radius: 8px;
-    padding: 12px 24px;
+    padding: 8px 16px;
     font-weight: 600;
     height: 44px;
     width: auto;
@@ -74,7 +75,7 @@
 
       border: 2px solid #e2e8f0;
       padding: 12px 16px;
-      height: 44px;
+      height: 30px;
       border-radius: 10px;
       outline: none;
       font-size: 14px;
@@ -126,7 +127,8 @@
   padding: 1rem;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
-  scrollbar-color: #cbd5e1 transparent;
+  scrollbar-color: #cbd5e1 transparent; 
+  overflow-y: scroll;
 
   &::-webkit-scrollbar {
     height: 8px;

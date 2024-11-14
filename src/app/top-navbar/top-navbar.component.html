@@ -1,24 +1,32 @@
 <div class="container"> 
     <mat-nav-list>
         <mat-list-item
-        (mouseover)="onHoverLocation(true)" 
-        (mouseleave)="onHoverLocation(false)">
-            <img [src]="navLogoLocation" alt="">
+            (mouseover)="onHoverLocation(true)" 
+            (mouseleave)="onHoverLocation(false)">
+            <img [src]="navLogoLocation" alt="Location">
+            <span class="tooltip">Location</span>
         </mat-list-item> 
+        
         <mat-list-item 
-        (mouseover)="onHoverNotification(true)" 
-        (mouseleave)="onHoverNotification(false)">
-            <img [src]="navLogoNotification" alt="">
+            (mouseover)="onHoverNotification(true)" 
+            (mouseleave)="onHoverNotification(false)">
+            <img [src]="navLogoNotification" alt="Notifications">
+            <span class="notification-indicator"></span>
+            <span class="tooltip">Notifications</span>
         </mat-list-item> 
+        
         <mat-list-item 
-        (mouseover)="onHoverSettings(true)" 
-        (mouseleave)="onHoverSettings(false)">
-            <img [src]="navLogoSettings" alt="">
+            (mouseover)="onHoverSettings(true)" 
+            (mouseleave)="onHoverSettings(false)">
+            <img [src]="navLogoSettings" alt="Settings">
+            <span class="tooltip">Settings</span>
         </mat-list-item> 
+        
         <mat-list-item 
-        (mouseover)="onHoverUser(true)" 
-        (mouseleave)="onHoverUser(false)">
-            <img [src]="navLogoUser" alt="">
+            (mouseover)="onHoverUser(true)" 
+            (mouseleave)="onHoverUser(false)">
+            <img [src]="navLogoUser" alt="Profile">
+            <span class="tooltip">Profile</span>
         </mat-list-item>
     </mat-nav-list>
 </div>
