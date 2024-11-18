@@ -3,30 +3,47 @@ import { Component, OnInit } from '@angular/core';
 import { catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Task } from '../task-item/Task.model';
-import { EventService } from '../EventService';
 import { TaskService } from '../task.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EventService } from '../event.service';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css']
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent implements OnInit { 
   tasks: Task[] = [];
   showForm: boolean = false;
   dropdownOpen: boolean = false;
   selectedEvent: string = '';
-  events: any[] = []; // Replace 'any' with your Event interface/class
+  events: any[] = []; 
   isLoading: boolean = false;
-  error: string | null = null;
+  error: string | null = null; 
+  eventId: string | null = null; 
+  changedTasks: Set<Task> = new Set();
+  hasChanges: boolean = false;
 
   constructor(
     private taskService: TaskService,
-    private eventService: EventService
+    private eventService: EventService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.loadTasksForEvent("1");
+  ngOnInit(): void { 
+    this.route.queryParams.subscribe(params => {
+      this.eventId = params['eventId'];
+      if (this.eventId) {
+        this.eventId
+        this.loadTasksForEvent(this.eventId);
+      }
+    });
+    
+  } 
+
+  goBack() {
+    this.router.navigate(['/content/event']);
   }
 
   
@@ -46,7 +63,6 @@ export class TaskComponent implements OnInit {
       )
       .subscribe(tasks => {
         this.tasks = tasks; 
-        console.log(this.tasks)
       });
   }
 
@@ -78,6 +94,12 @@ export class TaskComponent implements OnInit {
         }
       });
   }
+
+  onTaskStatusChange(task: Task) {
+    this.changedTasks.add(task); 
+    this.hasChanges = true; 
+    console.log(this.changedTasks)
+}
 
   updateTask(updatedTask: Task): void {
     this.isLoading = true;
@@ -121,8 +143,6 @@ export class TaskComponent implements OnInit {
         }
       });
   }
-
-  // Optional: Method to update task status
   updateTaskStatus(taskId: string, newStatus: string): void {
     this.isLoading = true;
     this.error = null;
@@ -146,7 +166,6 @@ export class TaskComponent implements OnInit {
       });
   }
 
-  // Optional: Method to sort tasks by date
   sortTasksByDate(): void {
     this.tasks.sort((a, b) => {
       const dateA = new Date(`${a.startDateTime}`);
@@ -155,9 +174,58 @@ export class TaskComponent implements OnInit {
     });
   }
 
-  // Optional: Method to check if a task is overdue
   isTaskOverdue(task: Task): boolean {
     const taskEndDate = new Date(`${task.endDateTime}`);
     return taskEndDate < new Date() && task.status !== 'COMPLETED';
+  } 
+  async saveChanges() {
+    if (!this.hasChanges) return;
+
+    try {   
+        console.log(this.changedTasks)
+        const updatedTasks: Task[] = [];
+        const updatePromises = Array.from(this.changedTasks).map(async task => {
+            try {
+                const updatedTask = await this.taskService.updateTaskStatus(task.id, task.status).toPromise();
+                if (updatedTask) {
+                    updatedTasks.push(updatedTask);
+                }
+                return updatedTask;
+            } catch (error) {
+                console.error(`Error updating task ${task.id}:`, error);
+                throw error;
+            }
+        });
+
+        await Promise.all(updatePromises);
+
+        updatedTasks.forEach(updatedTask => {
+            const index = this.tasks.findIndex(t => t.id === updatedTask.id);
+            if (index !== -1) {
+                this.tasks[index] = updatedTask;
+            }
+        });
+
+        const completedTasks = this.tasks.filter(task => task.status === 'COMPLETED').length;
+        const totalTasks = this.tasks.length;
+        if (this.eventId) {
+            await this.eventService.updateEventTasks(
+                this.eventId,
+                completedTasks,
+                totalTasks
+            ).toPromise();
+        }
+        this.changedTasks.clear();
+        this.hasChanges = false;
+
+        alert('Changes saved successfully!');
+    } catch (error) {
+        console.error('Error saving changes:', error);
+      
+        this.loadTasksForEvent(this.eventId!);
+        
+        alert('Error saving changes. Please try again.');
+    }
   }
+
 }

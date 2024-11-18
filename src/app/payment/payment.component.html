@@ -1,0 +1,73 @@
+<div class="payment-container">
+    <div class="header">
+        <div class="header-info">
+            <h1>Payment History</h1>
+            <h2 *ngIf="vendor">{{ vendor.name }}</h2>
+        </div>
+        <button class="add-button" (click)="openAddForm()">
+            + Add Payment
+        </button>
+    </div>
+
+    <div class="summary-cards">
+        <div class="summary-card">
+            <span class="label">Total Amount</span>
+            <span class="value">₹{{ totalAmount | number:'1.2-2' }}</span>
+        </div>
+        <div class="summary-card">
+            <span class="label">Paid Amount</span>
+            <span class="value success">₹{{ paidAmount | number:'1.2-2' }}</span>
+        </div>
+        <div class="summary-card">
+            <span class="label">Pending Amount</span>
+            <span class="value pending">₹{{ pendingAmount | number:'1.2-2' }}</span>
+        </div>
+    </div>
+
+    <div class="loading-spinner" *ngIf="isLoading">
+        Loading...
+    </div>
+
+    <div class="error-message" *ngIf="error">
+        {{ error }}
+    </div>
+
+
+<div class="payments-list">
+    <div class="payment-item" *ngFor="let payment of payments"
+    >
+        <div class="payment-info">
+            <div class="payment-header">
+                <span class="payment-date">{{ formatDate(payment.paymentDate) }}</span>
+                
+            </div>
+            <div class="payment-details">
+                <span class="payment-method">{{ getPaymentMethodLabel(payment.paymentType) }}</span>
+                <span class="payment-reference" *ngIf="payment.referenceNumber">
+                    Ref: {{ payment.referenceNumber }}
+                </span> 
+                <span class="payment-amount">₹{{ payment.amount | number:'1.2-2' }}</span>
+            </div>
+        </div>
+        
+        <div class="payment-actions">
+            <button class="icon-button edit" (click)="editPayment(payment)" title="Edit Payment">
+                <img src="assets/edit-grey.png" alt="Edit" class="icon-img">
+            </button>
+            <button class="icon-button delete" (click)="deletePayment(payment.id)" title="Delete Payment">
+                <img src="assets/delete-grey.png" alt="Delete" class="icon-img">
+            </button>
+        </div>
+    </div>
+
+    <div class="no-payments" *ngIf="payments.length === 0">
+        No payments found for this vendor. Click 'Add Payment' to create one.
+    </div>
+</div>
+
+    <app-add-payment-form
+        *ngIf="showAddForm"
+        [vendorId]="vendorId!"
+        (close)="closeAddForm()"
+    ></app-add-payment-form>
+</div>

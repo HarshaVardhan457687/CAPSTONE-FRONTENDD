@@ -1,10 +1,10 @@
 export interface Vendor {
-    id: number;
+    id: any;
     name: string;
-    remainingAmount: number;
-    amountPaid: number;
-    contactDetails: string;
-    type: 'Catering' | 'Venue' | 'Decor' | 'Photography' | 'Entertainment'; 
+    pendingAmount: number;
+    totalAmount: number;
+    contactEmail: string;
+    type: string; 
     eventId: string
   }
   

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup-form',
@@ -11,7 +12,7 @@ export class SignupFormComponent {
   
   signupForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -22,7 +23,9 @@ export class SignupFormComponent {
   onSubmit(): void {
     if (this.signupForm.valid) {
       console.log('Signup form submitted:', this.signupForm.value);
-
+      // console.log('Signup form submitted:', this.signupForm.value);
+      this.closeModal.emit();
+      this.router.navigate(['/home']);
     }
   }
 }

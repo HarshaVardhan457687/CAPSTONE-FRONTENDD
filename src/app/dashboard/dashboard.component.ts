@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Event } from '../add-event-form/Event';
-import { EventService } from '../EventService';
+import { EventService } from '../event.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -23,12 +24,15 @@ export class DashboardComponent implements OnInit{
         event.description = item.description
 
         if (item.startDate) {
-          const [startDate, startTime] = item.startDate.split(' ');
-          event.startDate = `${startDate} ${startTime}`;
+          const [date, time] = item.startDate.split(' ');
+          const [year, day, month] = date.split('-');
+          event.startDate = `${year}-${month}-${day} ${time}`;
         }
+        
         if (item.endDate) {
-          const [endDate, endTime] = item.endDate.split(' ');
-          event.endDate = `${endDate} ${endTime}`;
+          const [date, time] = item.endDate.split(' ');
+          const [year, day, month] = date.split('-');
+          event.endDate = `${year}-${month}-${day} ${time}`;
         }
 
         event.type = item.type;

@@ -1,0 +1,81 @@
+<div class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Add Payment</h2>
+            <button class="close-button" (click)="closeForm()">×</button>
+        </div>
+
+        <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" class="payment-form">
+            <div class="form-group">
+                <label for="amount">Amount (₹)</label>
+                <input 
+                    type="number" 
+                    id="amount" 
+                    formControlName="amount" 
+                    placeholder="Enter amount"
+                    [class.error]="paymentForm.get('amount')?.invalid && paymentForm.get('amount')?.touched"
+                >
+                <div class="error-message" *ngIf="paymentForm.get('amount')?.invalid && paymentForm.get('amount')?.touched">
+                    Amount is required and must be greater than 0
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Payment Date</label>
+                <input 
+                    type="date" 
+                    id="date" 
+                    formControlName="date"
+                    [class.error]="paymentForm.get('date')?.invalid && paymentForm.get('date')?.touched"
+                >
+                <div class="error-message" *ngIf="paymentForm.get('date')?.invalid && paymentForm.get('date')?.touched">
+                    Date is required
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="method">Payment Method</label>
+                <select 
+                    id="method" 
+                    formControlName="method"
+                    [class.error]="paymentForm.get('method')?.invalid && paymentForm.get('method')?.touched"
+                >
+                    <option value="">Select payment method</option>
+                    <option value="CASH">Cash</option>
+                    <option value="UPI">UPI</option>
+                    <option value="BANK_TRANSFER">Bank Transfer</option>
+                    <option value="CREDIT_CARD">Credit card</option>
+                    <option value="DEDIT_CARD">Debit card</option>
+                </select>
+                <div class="error-message" *ngIf="paymentForm.get('method')?.invalid && paymentForm.get('method')?.touched">
+                    Payment method is required
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="reference">Reference Number</label>
+                <input 
+                    type="text" 
+                    id="reference" 
+                    formControlName="reference" 
+                    placeholder="Enter reference number"
+                    [class.error]="paymentForm.get('reference')?.invalid && paymentForm.get('reference')?.touched"
+                >
+                <div class="error-message" *ngIf="paymentForm.get('reference')?.invalid && paymentForm.get('reference')?.touched">
+                    Reference number is required
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="cancel-button" (click)="closeForm()">Cancel</button>
+                <button 
+                    type="submit" 
+                    class="submit-button" 
+                    [disabled]="paymentForm.invalid || isSubmitting"
+                >
+                    Add Payment
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

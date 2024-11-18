@@ -4,7 +4,7 @@
             <div class="checkbox-wrapper">
                 <input 
                     type="checkbox" 
-                    [checked]="task.isCompleted"
+                    [checked]="task.status === 'COMPLETED'"
                     (change)="toggleComplete()"
                     id="task-{{task.id}}"
                 >

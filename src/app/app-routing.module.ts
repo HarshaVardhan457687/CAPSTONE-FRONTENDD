@@ -7,18 +7,30 @@ import { GuestsComponent } from './guests/guests.component';
 import { VendorComponent } from './vendor/vendor.component';
 import { BudgetComponent } from './budget/budget.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { TaskComponent } from './task/task.component';
+import { PaymentComponent } from './payment/payment.component';
 
 const routes: Routes = [ 
-  {path: '', redirectTo: 'content', pathMatch: 'full' }, 
+  {path: '', redirectTo: 'home', pathMatch: 'full' }, 
   {path: 'home', component: LandingPageComponent},
   {path: 'content', component: ContentComponent,
     children: [
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       {path: 'dashboard', component: DashboardComponent}, 
-      {path: 'event', component: EventsComponent}, 
+      {path: 'event', children: [
+        { path: '', component: EventsComponent },
+        { path: 'tasks', component: TaskComponent }
+      ]}, 
       {path: 'guest', component: GuestsComponent},
-      {path: 'vendor', component: VendorComponent}, 
-      {path: 'budget', component: BudgetComponent}
+      {path: 'vendor', 
+        children:[ 
+          { path: '', component: VendorComponent },
+          {path:'payment', component: PaymentComponent}
+        ]
+      }, 
+      {path: 'budget', component: BudgetComponent}, 
+      {path: 'task', component: TaskComponent},
+      {path: 'payment', component: PaymentComponent}
     ]
   }
 ];

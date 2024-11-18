@@ -1,21 +1,110 @@
 <div class="container">
-  <div class="content">
-    <h1 class="title">Welcome to <span>Our Platform</span></h1>
+  <nav class="navbar">
+    <div class="logo" (click)="scrollToSection('hero')">
+      <span class="material-icons">event</span>
+      EventMaster
+    </div>
+    <div class="nav-links">
+      <a (click)="scrollToSection('features')" class="nav-link">Features</a>
+      <a (click)="scrollToSection('stats')" class="nav-link">Stats</a>
+      <a (click)="scrollToSection('cta')" class="nav-link">Pricing</a>
+      <a (click)="scrollToSection('contact')" class="nav-link">Contact</a>
+    </div>
+    <div class="nav-buttons">
+      <button class="btn btn-outline-sm" (click)="openLogin()">Login</button>
+      <button class="btn btn-primary-sm" (click)="openSignup()">Sign up</button>
+    </div>
+  </nav>
+
+  <div id="hero" class="hero-section">
+    <h1 class="title">Streamline Your <span>Event Management</span></h1>
     <p class="description">
-      Join thousands of users who trust our platform for their daily needs. 
-      Start your journey today.
+      All-in-one platform to plan, organize, and execute events flawlessly. 
+      From guest lists to vendor management, we've got you covered.
     </p>
     <div class="button-container">
-      <button class="btn btn-primary" (click)="openLogin()">Login</button>
-      <button class="btn btn-outline" (click)="openSignup()">Sign up</button>
+      <button class="btn btn-primary" (click)="openSignup()">Get Started Free</button>
+      <button class="btn btn-outline" (click)="scrollToSection('features')">Learn More</button>
     </div>
   </div>
+
+  <div id="features" class="features-section">
+    <h2>Everything You Need to Manage Events</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="icon"><img src="assets\contact-list.png" alt=""></div>
+        <h3>Guest Management</h3>
+        <p>Track RSVPs, dietary preferences, and send automated reminders to your guests.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon"><img src="assets\money-bag.png" alt=""></div>
+        <h3>Budget Tracking</h3>
+        <p>Monitor expenses, create budgets, and generate financial reports effortlessly.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon"><img src="assets\relationship.png" alt=""></div>
+        <h3>Vendor Directory</h3>
+        <p>Manage vendor details, contracts, and payments all in one place.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon"><img src="\assets\calendar65.png" alt=""></div>
+        <h3>Schedule Planning</h3>
+        <p>Create and share event timelines, manage tasks, and set reminders.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="stats" class="stats-section">
+    <div class="stat-item">
+      <div class="stat-number">10,000+</div>
+      <div class="stat-label">Events Managed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">50,000+</div>
+      <div class="stat-label">Happy Guests</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">5,000+</div>
+      <div class="stat-label">Trusted Vendors</div>
+    </div>
+  </div>
+
+  <div id="cta" class="cta-section">
+    <h2>Ready to Transform Your Event Management?</h2>
+    <p>Join thousands of event planners who trust EventMaster</p>
+    <button class="btn btn-primary" (click)="openSignup()">Start Free Trial</button>
+  </div>
+
+  <footer id="contact" class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>EventMaster</h4>
+        <p>Making event management simple and efficient.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Features</h4>
+        <ul>
+          <li>Guest Management</li>
+          <li>Budget Tracking</li>
+          <li>Vendor Management</li>
+          <li>Schedule Planning</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <ul>
+          <li>support@eventmaster.com</li>
+          <li>1-800-EVENT-HELP</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2024 EventMaster. All rights reserved.
+    </div>
+  </footer>
 </div>
 
 <div class="overlay" [class.active]="showLogin || showSignup" (click)="closeModals()"></div>
 
 <app-login-form *ngIf="showLogin" (closeModal)="closeModals()"></app-login-form>
 <app-signup-form *ngIf="showSignup" (closeModal)="closeModals()"></app-signup-form>
-
-
-

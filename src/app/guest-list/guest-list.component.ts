@@ -1,38 +1,90 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Guest } from '../add-guest-form/Guest';
+import { GuestService } from '../guest.service';
+import { EventService } from '../event.service';
+
 
 @Component({
   selector: 'app-guest-list',
   templateUrl: './guest-list.component.html',
   styleUrls: ['./guest-list.component.css']
 })
-export class GuestListComponent { 
-  guestName: string = 'John Doe';
-  dietaryPreference: string = 'Vegetarian';
-  rsvpSent: boolean = false; 
+export class GuestListComponent implements OnInit{  
+  @Input() guest!: Guest;
+  @Input() eventId!: string; 
+
+
+  constructor(private guestService: GuestService, private eventService: EventService){}
+  ngOnInit(): void {
+
+  }
 
   sendRsvp() {
-    if (!this.rsvpSent) {
-      this.rsvpSent = true;
-      console.log("RSVP sent for:", this.guestName);
-    }
+
+  } 
+
+  getDietaryPreferenceClass(): string {
+    if (!this.guest.dietaryPreference) return '';
+    return this.guest.dietaryPreference === 0 
+      ? 'vegetarian' 
+      : 'non-vegetarian';
   }
+
 
 
   sendReminders() {
-    // Logic to handle sending reminders
-    console.log("Reminders sent to:", this.guestName);
+
   }
 
-  // Method to handle editing guest details
+
   editGuest() {
-    // Logic for editing guest information
-    console.log("Editing guest:", this.guestName);
+
   }
 
-  // Method to delete guest entry
+
   deleteGuest() {
-    // Logic to delete guest entry
-    console.log("Guest deleted:", this.guestName);
+    this.guestService.deleteGuest(this.guest.id).subscribe(
+      () => {
+        this.updateEventGuestCount();
+      
+      },
+      (error) => {
+        console.error('Error deleting guest:', error);
+      }
+    );
+  }  
+  private updateEventGuestCount() {
+    this.eventService.getEventById(this.eventId).subscribe(
+      event => {
+        const updatedGuestCount = Math.max(0, event.totalGuests - 1);
+        this.eventService.updateEventGuests(this.eventId, updatedGuestCount).subscribe(
+          () => console.log('Event guest count updated'),
+          (error: any) => console.error('Error updating event guest count:', error)
+        );
+      },
+      error => console.error('Error getting event details:', error)
+    );
+  }
+
+  canSendRsvp(): boolean {
+    return this.getRSVPMapping(this.guest.rsvpStatus) === 'NOT_SENT';
+  } 
+
+  getRSVPMapping(num: number) : String{ 
+    switch (num) {
+      case 0:
+        return 'NOT_SENT';
+      case 1:
+        return 'SENT';
+      case 2:
+        return 'REGISTERED';
+      case 3:
+        return 'DECLINED';
+      case 4:
+        return 'NO_RESPONSE';
+      default:
+        return 'NOT_SENT';
+    }
   }
 }
 

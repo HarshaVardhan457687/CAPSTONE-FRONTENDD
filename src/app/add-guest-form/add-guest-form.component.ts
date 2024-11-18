@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Guest } from './Guest';
-import { GuestServiceService } from '../guest-service.service';
 import { NotificationDialogComponent } from '../notification-dialog/notification-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { GuestService } from '../guest.service';
+import { EventService } from '../event.service';
 
 @Component({
   selector: 'app-add-guest-form',
@@ -11,15 +12,16 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./add-guest-form.component.css']
 })
 export class AddGuestFormComponent { 
-
+  @Input() eventId: string = '';
   @Output() close = new EventEmitter<void>();  
-  @Output() formOpen = new EventEmitter<boolean>(); 
+  @Output() formOpen = new EventEmitter<boolean>();  
+  @Output() guestAdded = new EventEmitter<Guest>(); 
   isSubmitting = false 
 
-  constructor(private guestService: GuestServiceService, private dialog: MatDialog){
+  constructor(private guestService: GuestService, private dialog: MatDialog, private eventService: EventService){
 
   } 
-  dietaryPreference: number = 0;
+  dietaryPreference = 0;
 
   ngOnInit() {
     this.formOpen.emit(true); 
@@ -31,7 +33,6 @@ export class AddGuestFormComponent {
   guest = {
     name: '',
     email: '',
-    event: '',
     food: '',    
   };
   eventOptions = ['corporate'];
@@ -53,23 +54,38 @@ export class AddGuestFormComponent {
 
   validateForm(form: NgForm): boolean{ 
     return true;
+  }  
+
+  private updateEventGuestCount() {
+    this.eventService.getEventById(this.eventId).subscribe(
+      event => {
+        const updatedGuestCount = event.totalGuests + 1;
+        this.eventService.updateEventGuests(this.eventId, updatedGuestCount).subscribe(
+          () => console.log('Event guest count updated'),
+          (error: any) => console.error('Error updating event guest count:', error)
+        );
+      },
+      error => console.error('Error getting event details:', error)
+    );
   }
+  
 
   onSubmit(form: NgForm) {
       if (this.validateForm(form)) {
         const newGuest = new Guest(
-          null, this.guest.name, this.guest.email, this.dietaryPreference, 0, this.guest.event
+          null, this.guest.name, this.guest.email, this.dietaryPreference, 0, this.eventId
         ) 
         this.isSubmitting = true;
         this.guestService.saveGuest(newGuest).subscribe({
           next: (response) => {
-            this.isSubmitting = false;
-            this.openDialog('Guest saved successfully!', true); 
+            this.isSubmitting = false;  
+            this.updateEventGuestCount();
+            this.guestAdded.emit(newGuest);  
+            this.close.emit(); 
             console.log(response)
           },
           error: (err) => {
             this.isSubmitting = false;
-            this.openDialog('Failed to save the Guest. Please try again later.', false);
             console.error(err);
           } 
         }); 

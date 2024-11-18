@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EventService } from '../EventService';
 import { Event } from '../add-event-form/Event';
+import { EventService } from '../event.service';
 
 @Component({
   selector: 'app-events',
@@ -27,18 +27,20 @@ export class EventsComponent implements OnInit{
         event.totalTask = item.totalTask
 
         if (item.startDate) {
-          const [startDate, startTime] = item.startDate.split(' ');
-          event.startDate = `${startDate} ${startTime}`;
+          const [date, time] = item.startDate.split(' ');
+          const [year, day, month] = date.split('-');
+          event.startDate = `${year}-${month}-${day} ${time}`;
         }
+        
         if (item.endDate) {
-          const [endDate, endTime] = item.endDate.split(' ');
-          event.endDate = `${endDate} ${endTime}`;
+          const [date, time] = item.endDate.split(' ');
+          const [year, day, month] = date.split('-');
+          event.endDate = `${year}-${month}-${day} ${time}`;
         }
 
         event.type = item.type;
         event.status = item.status;
         return event;
-
     });
   });
   }

@@ -26,5 +26,4 @@ export class Task {
     }
 }
 
-// Type for creating a new task (without id)
 export type CreateTaskDTO = Omit<Task, 'id'>;

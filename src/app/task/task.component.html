@@ -1,15 +1,35 @@
-<div class="container">
-    <button class="add-task-button" (click)="openForm()">
-        <i class="fas fa-plus"></i> Add New Task
-    </button>
+<div class="container"> 
+    <div class="header-section">
+        <button class="back-button" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i> Back
+        </button> 
+
+        <button class="add-task-button" (click)="openForm()">
+            <i class="fas fa-plus"></i> Add New Task
+        </button>
+    </div>
     
-    <div class="main-content">
+    <div class="main-content"> 
+        <div class="header-left"> 
+            <h1 class="header">Tasks</h1> 
+        </div>
         <div class="tasks-container">
             <div class="task-list">
-                <app-task-item *ngFor="let task of tasks" [task]="task"></app-task-item>
+                <div class="save-button-container">
+                    <button 
+                        class="save-button" 
+                        [disabled]="!hasChanges"
+                        (click)="saveChanges()"
+                    >
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            <div class="task-list">
+                <app-task-item *ngFor="let task of tasks" [task]="task"
+                    (statusChange)="onTaskStatusChange($event)" ></app-task-item>
             </div>
         </div>
     </div>
 </div>
 
-<app-addtask *ngIf="showForm" (close)="closeForm()"></app-addtask>
+<app-addtask *ngIf="showForm" [eventId]="eventId" (close)="closeForm()"></app-addtask>

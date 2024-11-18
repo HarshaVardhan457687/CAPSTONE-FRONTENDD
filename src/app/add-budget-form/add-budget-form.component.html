@@ -1,0 +1,29 @@
+<div class="modal-overlay" (click)="closeForm()"></div>
+<form #budgetForm="ngForm" (ngSubmit)="onSubmit()" class="form-task">
+  <div class="header">
+    <h1 class="heading">Add New Budget</h1>
+    <button type="button" class="cancel" (click)="closeForm()">
+      <img src="assets/cancel-grey.png" alt="close">
+    </button>
+  </div>
+
+  <div class="form-group">
+    <label>Amount Allocated:</label>
+    <input 
+      type="number" 
+      name="amount" 
+      [(ngModel)]="budget.amount" 
+      required 
+      #amountInput="ngModel"
+      [class.error]="amountInput.invalid && amountInput.touched"
+      min="0"
+    />
+  </div>
+
+  <button 
+    type="submit" 
+    class="submit" 
+    [disabled]="budgetForm.invalid || isSubmitting">
+    {{ isSubmitting ? 'Adding...' : 'Add Budget' }}
+  </button>
+</form>

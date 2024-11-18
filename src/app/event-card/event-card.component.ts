@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-card',
@@ -12,7 +13,16 @@ export class EventCardComponent {
   showStatusDropdown = false;
   showTaskForm = false; 
   showGuestForm = false; 
-  isFormOpen = false
+  isFormOpen = false 
+
+  constructor(private router: Router) {}
+
+
+  openTasks() {
+    this.router.navigate(['/content/event/tasks'], { 
+      queryParams: { eventId: this.eventt.id }
+    });
+  }
 
 
   toggleMenu() {

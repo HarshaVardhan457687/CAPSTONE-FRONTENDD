@@ -19,7 +19,7 @@
           <option value="Entertainment">Entertainment</option>
       </select> 
 
-      <select [(ngModel)]="selectedEvent" (change)="onEventChange()" class="filter-dropdown">
+      <select [(ngModel)]="selectedEvent" (change)="onEventChange($event)" class="filter-dropdown">
           <option value="">All Events</option>
           <option *ngFor="let event of events" [value]="event.id">
               {{ event.name }}
@@ -28,13 +28,10 @@
   </div>
 
   <div class="cards">
-      <div class="vendor-card" *ngFor="let vendor of filteredVendors">
-          <h2>{{ vendor.name }}</h2>
-          <p><strong>Type:</strong> {{ vendor.type }}</p>
-          <p><strong>Contact:</strong> {{ vendor.contactDetails }}</p>
-          <p><strong>Event:</strong> {{ vendor.eventId }}</p>
-          <p><strong>Remaining Amount:</strong> ${{ vendor.remainingAmount }}</p>
-          <p><strong>Amount Paid:</strong> ${{ vendor.amountPaid }}</p>
-      </div>
-  </div>
+    <app-vendor-card 
+        *ngFor="let vendor of filteredVendors"
+        [vendor]="vendor"
+    ></app-vendor-card>
+    </div>
 </div>
+<router-outlet></router-outlet>  

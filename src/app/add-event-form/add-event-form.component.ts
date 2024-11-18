@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { EventService } from '../EventService';
 import { MatDialog } from '@angular/material/dialog';
 import { Event } from './Event';
 import { NotificationDialogComponent } from '../notification-dialog/notification-dialog.component';
+import { EventService } from '../event.service';
 
 @Component({
   selector: 'app-add-event-form',
@@ -99,6 +99,10 @@ export class AddEventFormComponent{
     return start >= end;
   }
 
+  private formatDate(dateStr: string): string {
+    const [year, month, day] = dateStr.split('-');
+    return `${year}-${day}-${month}`;
+  }
 
   onSubmit(form: NgForm) {
     if (this.validateForm(form)) {
@@ -107,8 +111,8 @@ export class AddEventFormComponent{
         'user-id',  
         this.eventName,
         this.venue,
-        `${this.startDate} ${this.startTime}`,  
-        `${this.endDate} ${this.endTime}`,  
+        `${this.formatDate(this.startDate)} ${this.startTime}`,  
+        `${this.formatDate(this.endDate)} ${this.endTime}`,  
         0, 
         0,
         this.eventDescription, 
@@ -118,12 +122,12 @@ export class AddEventFormComponent{
       ) 
       this.isSubmitting = true;
       this.eventService.saveEvent(newEvent).subscribe({
-        next: (response) => {
+        next: (response: any) => {
           this.isSubmitting = false;
           this.openDialog('Event saved successfully!', true); 
           console.log(response)
         },
-        error: (err) => {
+        error: (err: any) => {
           this.isSubmitting = false;
           this.openDialog('Failed to save the event. Please try again later.', false);
           console.error(err);

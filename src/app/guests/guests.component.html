@@ -1,24 +1,57 @@
-<div class="container">
-    <button class="add-task-button" (click)="openForm()">+ Add New Guest</button>
-    <div class="main-content">
+<div class="guest-page-container">
+  <h1>Guests</h1>
+
+  <div class="filters-container">
       <div class="dropdown">
-        <button (click)="toggleDropdown()" class="dropdown-button">
-          Select an Event
-          <i [class]="dropdownOpen ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
-        </button>
-  
-        <div class="dropdown-content" *ngIf="dropdownOpen">
-          <a href="#" (click)="selectOption('Option 1')">Option 1</a>
-          <a href="#" (click)="selectOption('Option 2')">Option 2</a>
-          <a href="#" (click)="selectOption('Option 3')">Option 3</a>
-        </div>
+          <button (click)="toggleDropdown($event)" 
+                  class="dropdown-button"
+                  [class.active]="dropdownOpen">
+              {{ selectedEventId ? (events | find:selectedEventId)?.name : 'Select an Event' }}
+              <i [class]="dropdownOpen ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+          </button>
+
+          <div class="dropdown-content" *ngIf="dropdownOpen">
+              <div *ngIf="events.length === 0" class="no-data">
+                  No events available
+              </div>
+              <ng-container *ngIf="events.length > 0">
+                  <a *ngFor="let event of events" 
+                     (click)="selectOption(event)"
+                     [class.selected]="selectedEventId === event.id">
+                      {{ event.name }}
+                  </a>
+              </ng-container>
+          </div>
       </div>
-  
-      <div class="guest-list-container">
-        <div class="guest-list" *ngFor="let i of num">
-          <app-guest-list></app-guest-list>
-        </div>
-      </div>
-    </div>
+
+      <button class="add-guest-button" 
+              [disabled]="!selectedEventId" 
+              (click)="openForm()">
+          + Add New Guest
+      </button>
   </div>
-<app-add-guest-form *ngIf="showForm" (close)="closeForm()"></app-add-guest-form>  
+
+  <div class="guest-list-container">
+      <ng-container>
+          <div *ngIf="!selectedEventId" class="no-selection">
+              Please select an event to view guests
+          </div>
+          <div *ngIf="selectedEventId && guests.length === 0" class="no-data">
+              No guests found for this event
+          </div>
+          <div class="guest-list" *ngIf="guests.length > 0">
+              <app-guest-list *ngFor="let guest of guests" 
+                             [guest]="guest"
+                             [eventId]="selectedEventId">
+              </app-guest-list>
+          </div>
+      </ng-container>
+  </div>
+</div>
+
+<app-add-guest-form 
+  *ngIf="showForm" 
+  [eventId]="selectedEventId"
+  (close)="closeForm()"
+  (guestAdded)="onGuestAdded($event)">
+</app-add-guest-form>

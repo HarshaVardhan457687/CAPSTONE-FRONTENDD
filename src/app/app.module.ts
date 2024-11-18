@@ -32,6 +32,12 @@ import { MatIconModule } from '@angular/material/icon'
 import { ClickOutsideDirective } from './click-outside-directive';
 import { TaskComponent } from './task/task.component';
 import { TaskItemComponent } from './task-item/task-item.component';
+import { FindPipe } from './find.pipe';
+import { PaymentComponent } from './payment/payment.component';
+import { VendorCardComponent } from './vendor-card/vendor-card.component';
+import { AddPaymentFormComponent } from './add-payment-form/add-payment-form.component';
+import { AddBudgetFormComponent } from './add-budget-form/add-budget-form.component';
+
 
 
 
@@ -62,7 +68,12 @@ import { TaskItemComponent } from './task-item/task-item.component';
     NotificationDialogComponent,
     ClickOutsideDirective,
     TaskComponent,
-    TaskItemComponent
+    TaskItemComponent,
+    FindPipe,
+    PaymentComponent,
+    VendorCardComponent,
+    AddPaymentFormComponent,
+    AddBudgetFormComponent,
   ],
   imports: [
     BrowserModule, 
@@ -73,7 +84,8 @@ import { TaskItemComponent } from './task-item/task-item.component';
     MatDialogModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatIconModule,
+    MatIconModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

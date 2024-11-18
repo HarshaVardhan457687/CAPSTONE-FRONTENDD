@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Vendor } from './vendor.model';
-import { EventService } from '../EventService';
 import { Event } from '../add-event-form/Event';
+import { VendorService } from '../vendor.service';
+import { EventService } from '../event.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vendor',
@@ -14,9 +16,10 @@ export class VendorComponent implements OnInit {
     searchTerm: string = '';
     selectedType: string = '';
     selectedEvent: string = '';
-    events: Event[] = [];
+    events: Event[] = []; 
+    selectedEventId: string = '';
 
-    constructor(private eventService: EventService) {}
+    constructor(private eventService: EventService, private vendorService: VendorService, private router: Router) {}
 
     ngOnInit() {
         this.loadEvents();
@@ -30,6 +33,16 @@ export class VendorComponent implements OnInit {
     }
 
     loadVendors() {
+        if(!this.selectedEventId){   
+            this.vendorService.getAllVendors().subscribe(vendors => { 
+                this.vendors = vendors
+            })
+        } 
+        else{  
+            this.vendorService.getVendorsByEventId(this.selectedEventId).subscribe(vendors => { 
+                this.vendors = vendors
+            })
+        }
 
     }
 
@@ -41,8 +54,10 @@ export class VendorComponent implements OnInit {
         this.filterVendors();
     }
 
-    onEventChange() {
-        this.filterVendors();
+
+    onEventChange(event: any) {
+        this.selectedEventId = event.target.value;
+        this.loadVendors(); 
     }
 
     filterVendors() {
@@ -51,14 +66,13 @@ export class VendorComponent implements OnInit {
                 vendor.name.toLowerCase().includes(this.searchTerm.toLowerCase());
             
             const matchesType = !this.selectedType || 
-                vendor.type === this.selectedType;
+                vendor.type.toUpperCase() === this.selectedType.toUpperCase();
 
             const matchesEvent = !this.selectedEvent || 
                 vendor.eventId?.toString() === this.selectedEvent;
 
             return matchesSearch && matchesType && matchesEvent;
         });
-    }
+    } 
 
-    // Your existing methods...
 }

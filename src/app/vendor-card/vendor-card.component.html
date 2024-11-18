@@ -1,0 +1,25 @@
+<div class="vendor-card" (click)="navigateToPayment($event)" [class.clickable]="true">
+    <div class="card-header">
+        <h2>{{ vendor.name }}</h2>
+        <span class="vendor-type">{{ vendor.type }}</span>
+    </div>
+    
+    <div class="card-content">
+        <div class="info-row">
+            <span class="label">Contact:</span>
+            <span class="value">{{ vendor.contactEmail }}</span>
+        </div>
+        <div class="info-row">
+            <span class="label">Remaining Amount:</span>
+            <span class="value amount pending">₹{{ vendor.pendingAmount }}</span>
+        </div>
+        <div class="info-row">
+            <span class="label">Total Amount:</span>
+            <span class="value amount">₹{{ vendor.totalAmount }}</span>
+        </div>
+    </div>
+    
+    <div class="card-footer">
+        <span class="view-details">View Payment Details →</span>
+    </div>
+</div>

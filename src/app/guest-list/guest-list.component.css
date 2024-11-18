@@ -96,23 +96,16 @@
 .dietary-preference {
     display: flex;
     align-items: center;
-    gap: 8px;
     padding: 6px 12px;
     background: #f8faff;
     border-radius: 20px;
     border: 1px solid rgba(226, 232, 240, 0.8);
     transition: all 0.3s ease;
 
-    label {
-        font-size: 0.9rem;
-        color: #64748b;
-        font-weight: 500;
-    }
-
     span {
         font-size: 0.9rem;
         font-weight: 600;
-        padding: 2px 8px;
+        padding: 4px 12px;
         border-radius: 12px;
         
         &.vegetarian {
@@ -162,7 +155,11 @@
     }
 
     &.edit:hover {
-        background: rgba(59, 130, 246, 0.08);
+        background: rgba(37, 99, 235, 0.1); 
+
+        .icon-img {
+            filter: invert(32%) sepia(98%) saturate(1753%) hue-rotate(210deg) brightness(97%) contrast(101%);
+        }
     }
 
     &.delete:hover {

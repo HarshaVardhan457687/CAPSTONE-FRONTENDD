@@ -1,8 +1,8 @@
 .container {
     position: absolute;
     right: 0;
-    margin-top: 60px;
-    width: calc(100vw - 200px);
+    top: 60px;
+    width: calc(100vw - 250px);
     height: calc(100vh - 60px);
     background: linear-gradient(135deg, #f8faff 0%, #eef5ff 100%);
     overflow-y: auto;
@@ -282,4 +282,101 @@
       background: #450a0a;
       color: #fca5a5;
     }
+  } 
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+        background: #f8fafc;
+        transform: translateX(-2px);
+    }
+
+    i {
+        font-size: 0.9rem;
+    }
+}
+.save-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.save-button {
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+
+  &:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+      box-shadow: none;
   }
+
+  &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+  }
+
+  i {
+      font-size: 0.9rem;
+  }
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #9ca3af;
+} 
+
+.header {
+  font-size: 1.8rem;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  position: relative;
+  
+  &::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(to right, #3b82f6, #2563eb);
+      border-radius: 2px;
+  }
+}
