@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -12,7 +13,7 @@ export class LoginFormComponent {
   
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -21,7 +22,21 @@ export class LoginFormComponent {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      console.log('Login form submitted:', this.loginForm.value);
+      const { email, password } = this.loginForm.value;
+
+      this.authService.login(email, password).subscribe({
+        next: (token) => {
+          console.log('Login successful');
+          this.closeModal.emit();
+          this.router.navigate(['/content/dashboard']);
+        },
+        error: (error) => {
+          console.error('Login error:', error);
+        },
+        complete: () => {
+
+        }
+      });
       this.closeModal.emit();
       this.router.navigate(['/content/dashboard']);
     }
