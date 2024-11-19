@@ -26,10 +26,16 @@
                 </div>
             <div class="task-list">
                 <app-task-item *ngFor="let task of tasks" [task]="task"
-                    (statusChange)="onTaskStatusChange($event)" ></app-task-item>
+                    (statusChange)="onTaskStatusChange($event)"  
+                    (taskEdit)="onTaskEdit($event)"></app-task-item>
             </div>
         </div>
     </div>
 </div>
 
-<app-addtask *ngIf="showForm" [eventId]="eventId" (close)="closeForm()"></app-addtask>
+<app-addtask *ngIf="showForm" [eventId]="eventId" (close)="closeForm()"></app-addtask> 
+<app-edit-task-form
+*ngIf="showEditForm && selectedTask"
+[task]="selectedTask"
+(close)="showEditForm = false"
+></app-edit-task-form>

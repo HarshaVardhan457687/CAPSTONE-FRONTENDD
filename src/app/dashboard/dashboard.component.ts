@@ -24,16 +24,19 @@ export class DashboardComponent implements OnInit{
         event.description = item.description
 
         if (item.startDate) {
+          console.log(item.startDate)
           const [date, time] = item.startDate.split(' ');
           const [year, day, month] = date.split('-');
-          event.startDate = `${year}-${month}-${day} ${time}`;
+          event.startDate = `${day}-${month}-${year} ${time}`;
         }
         
-        if (item.endDate) {
+        if (item.endDate) { 
+          console.log(item.endDate)
           const [date, time] = item.endDate.split(' ');
-          const [year, day, month] = date.split('-');
-          event.endDate = `${year}-${month}-${day} ${time}`;
-        }
+          const [day, month, year] = date.split('-');
+          event.endDate = `${day}-${month}-${year} ${time}`;
+        } 
+
 
         event.type = item.type;
         event.status = item.status;

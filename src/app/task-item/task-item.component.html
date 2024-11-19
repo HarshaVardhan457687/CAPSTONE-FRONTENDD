@@ -17,11 +17,11 @@
             <div class="datetime-info">
                 <div class="time-block">
                     <i class="far fa-clock"></i>
-                    <span>Start: {{ formatDateTime(task.startDateTime) | date:'MMM d, y, h:mm a' }}</span>
+                    <span>Start: {{ task.startDateTime }}</span>
                 </div>
                 <div class="time-block">
                     <i class="fas fa-hourglass-end"></i>
-                    <span>End: {{ formatDateTime(task.endDateTime) | date:'MMM d, y, h:mm a' }}</span>
+                    <span>End: {{ task.endDateTime }}</span>
                 </div>
             </div>
             
@@ -35,4 +35,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> 

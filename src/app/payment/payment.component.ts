@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Vendor } from '../vendor/vendor.model';
 import { VendorService } from '../vendor.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Payment } from './payment.model';
 
 @Component({
@@ -22,7 +22,8 @@ export class PaymentComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private vendorService: VendorService
+    private vendorService: VendorService, 
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -88,6 +89,10 @@ export class PaymentComponent implements OnInit {
 
   editPayment(payment: Payment) {
     console.log('Edit payment:', payment);
+  } 
+
+  goBack() {
+    this.router.navigate(['/content/vendor']);
   }
 
   deletePayment(paymentId: string | null) {

@@ -22,7 +22,6 @@ export class LoginFormComponent {
   onSubmit(): void {
     if (this.loginForm.valid) {
       console.log('Login form submitted:', this.loginForm.value);
-      // console.log('Login form submitted:', this.loginForm.value);
       this.closeModal.emit();
       this.router.navigate(['/content/dashboard']);
     }

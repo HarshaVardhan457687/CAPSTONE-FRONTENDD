@@ -15,7 +15,11 @@ export class GuestsComponent implements OnInit{
   filteredGuests: Guest[] = [];
   selectedEventId: string = '';
   dropdownOpen = false;
-  showForm = false;
+  showForm = false; 
+  showEditForm = false;
+  selectedGuest: Guest | null = null;
+
+  
 
   constructor(
     private eventService: EventService,
@@ -88,6 +92,19 @@ export class GuestsComponent implements OnInit{
 
   closeForm() {
     this.showForm = false;
+    if (this.selectedEventId) {
+      this.loadGuests(this.selectedEventId);
+    }
+  } 
+
+  onGuestEdit(guest: Guest) {
+    this.selectedGuest = guest;
+    this.showEditForm = true;
+  }
+
+  closeEditForm() {
+    this.showEditForm = false;
+    this.selectedGuest = null;
     if (this.selectedEventId) {
       this.loadGuests(this.selectedEventId);
     }

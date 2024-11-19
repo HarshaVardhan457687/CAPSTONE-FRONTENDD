@@ -27,6 +27,11 @@ export class AddTaskComponent {
 
   closeForm(): void {
     this.close.emit();
+  } 
+
+  private formatDate(dateStr: string): string {
+    const [year, month, day] = dateStr.split('-');
+    return `${day}-${month}-${year}`;
   }
 
   onSubmit(): void {
@@ -38,8 +43,8 @@ export class AddTaskComponent {
       this.task.name!,
       this.task.description!,
       'PENDING',
-      this.task.startDate! + ' ' + this.task.startTime!,
-      this.task.endDate! + ' ' + this.task.startTime!,
+      `${this.formatDate(this.task.startDate)} ${this.task.startTime}`,  
+      `${this.formatDate(this.task.endDate)} ${this.task.endTime}`,  
       this.eventId!
     );
     console.log(newTask)

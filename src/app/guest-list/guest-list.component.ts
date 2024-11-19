@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Guest } from '../add-guest-form/Guest';
 import { GuestService } from '../guest.service';
 import { EventService } from '../event.service';
@@ -12,6 +12,10 @@ import { EventService } from '../event.service';
 export class GuestListComponent implements OnInit{  
   @Input() guest!: Guest;
   @Input() eventId!: string; 
+  @Output() guestEdit = new EventEmitter<Guest>();   
+
+
+
 
 
   constructor(private guestService: GuestService, private eventService: EventService){}
@@ -36,9 +40,8 @@ export class GuestListComponent implements OnInit{
 
   }
 
-
   editGuest() {
-
+    this.guestEdit.emit(this.guest);  
   }
 
 

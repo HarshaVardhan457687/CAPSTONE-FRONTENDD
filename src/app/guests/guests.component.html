@@ -42,7 +42,8 @@
           <div class="guest-list" *ngIf="guests.length > 0">
               <app-guest-list *ngFor="let guest of guests" 
                              [guest]="guest"
-                             [eventId]="selectedEventId">
+                             [eventId]="selectedEventId"
+                             (guestEdit)="onGuestEdit($event)">
               </app-guest-list>
           </div>
       </ng-container>
@@ -54,4 +55,14 @@
   [eventId]="selectedEventId"
   (close)="closeForm()"
   (guestAdded)="onGuestAdded($event)">
-</app-add-guest-form>
+</app-add-guest-form> 
+
+<app-edit-guest-form
+*ngIf="showEditForm && selectedGuest"
+    [guest]="selectedGuest"
+    [eventId]="selectedEventId"
+    (close)="closeEditForm()"
+    (guestUpdated)="loadGuests(selectedEventId)"
+>
+</app-edit-guest-form>
+

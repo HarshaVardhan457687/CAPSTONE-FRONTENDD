@@ -72,5 +72,12 @@ export class VendorService {
       .pipe(
         catchError(this.handleError)
       );
+  } 
+  updatePayment(paymentId: string | null, payment: Payment, vendorId: string): Observable<Payment> {
+    const url = `${this.apiUrl}/updatepayment/${vendorId}/${paymentId}`;
+    return this.http.put<Payment>(url, payment)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 }

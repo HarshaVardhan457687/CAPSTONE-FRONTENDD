@@ -4,14 +4,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VendorService } from '../vendor.service';
 
 @Component({
-  selector: 'app-add-payment-form',
-  templateUrl: './add-payment-form.component.html',
-  styleUrls: ['./add-payment-form.component.css']
+  selector: 'app-edit-payment-form',
+  templateUrl: './edit-payment-form.component.html',
+  styleUrls: ['./edit-payment-form.component.css']
 })
-export class AddPaymentFormComponent {
+export class EditPaymentFormComponent { 
+  @Input() payment!: Payment;
   @Input() vendorId!: string;
   @Output() close = new EventEmitter<void>();
-  @Output() paymentAdded = new EventEmitter<Payment>();
+  @Output() paymentUpdated = new EventEmitter<Payment>();
 
   paymentForm: FormGroup;
   isSubmitting = false;
@@ -24,48 +25,54 @@ export class AddPaymentFormComponent {
       reference: ['', Validators.required],
       notes: ['']
     });
-  } 
+  }
+
+  ngOnInit() {
+    const [day, month, year] = this.payment.paymentDate.split('-');
+    const formattedDate = `${year}-${month}-${day}`;
+
+    this.paymentForm.patchValue({
+      amount: this.payment.amount,
+      date: formattedDate,
+      method: this.payment.paymentType,
+      reference: this.payment.referenceNumber
+    });
+  }
 
   private formatDate(dateStr: string): string {
     const [year, month, day] = dateStr.split('-');
     return `${day}-${month}-${year}`;
   }
 
-
-
   onSubmit() {
     if (this.paymentForm.valid && !this.isSubmitting) {
       this.isSubmitting = true;
       
-      const payment: Payment = {
-        id: crypto.randomUUID(), 
+      const updatedPayment: Payment = {
+        id: this.payment.id,
         vendorId: this.vendorId,
         amount: this.paymentForm.value.amount,
         paymentDate: this.formatDate(this.paymentForm.value.date),
         paymentType: this.paymentForm.value.method.toUpperCase(),
-        paymentStatus: 'IN_PROCESS',
+        paymentStatus: this.payment.paymentStatus,
         referenceNumber: this.paymentForm.value.reference
-      };   
-      
+      };
 
-      this.vendorService.createPayment(payment, this.vendorId).subscribe({
-        next: () => {
-          
-          console.log("Payment saved")
-
+      this.vendorService.updatePayment(updatedPayment.id, updatedPayment, this.vendorId).subscribe({
+        next: (response) => {
+          this.paymentUpdated.emit(response);
+          this.closeForm();
         },
         error: (error) => {
-          console.error('Error creating payment:', error);
+          console.error('Error updating payment:', error);
+          this.isSubmitting = false;
         }
       });
-      } 
-    }  
-
-
-    closeForm() {
-      this.close.emit();
     }
+  }
 
-
-
+  closeForm() {
+    this.close.emit();
+  }
 }
+

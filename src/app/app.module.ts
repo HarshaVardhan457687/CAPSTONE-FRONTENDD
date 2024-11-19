@@ -37,6 +37,9 @@ import { PaymentComponent } from './payment/payment.component';
 import { VendorCardComponent } from './vendor-card/vendor-card.component';
 import { AddPaymentFormComponent } from './add-payment-form/add-payment-form.component';
 import { AddBudgetFormComponent } from './add-budget-form/add-budget-form.component';
+import { EditTaskFormComponent } from './edit-task-form/edit-task-form.component';
+import { EditGuestFormComponent } from './edit-guest-form/edit-guest-form.component';
+import { EditPaymentFormComponent } from './edit-payment-form/edit-payment-form.component';
 
 
 
@@ -74,6 +77,9 @@ import { AddBudgetFormComponent } from './add-budget-form/add-budget-form.compon
     VendorCardComponent,
     AddPaymentFormComponent,
     AddBudgetFormComponent,
+    EditTaskFormComponent,
+    EditGuestFormComponent,
+    EditPaymentFormComponent,
   ],
   imports: [
     BrowserModule, 

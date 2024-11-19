@@ -17,7 +17,12 @@ export class TaskItemComponent {
 
   constructor(private taskService: TaskService, private eventService: EventService){ 
     
-  } 
+  }  
+
+  editTask() {
+    this.taskEdit.emit(this.task); 
+  }
+
 
   formatDateTime(dateTimeStr: string): Date {
     const [datePart, timePart] = dateTimeStr.split(' ');
@@ -41,10 +46,6 @@ export class TaskItemComponent {
       this.task.status = this.task.status === 'COMPLETED' ? 'PENDING' : 'COMPLETED';
       this.statusChange.emit(this.task);
     }
-  }
-
-  editTask() {
-
   }
 
   deleteTask() {

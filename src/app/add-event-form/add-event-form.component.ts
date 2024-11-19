@@ -101,10 +101,12 @@ export class AddEventFormComponent{
 
   private formatDate(dateStr: string): string {
     const [year, month, day] = dateStr.split('-');
-    return `${year}-${day}-${month}`;
+    return `${day}-${month}-${year}`;
   }
 
   onSubmit(form: NgForm) {
+    console.log(this.startDate)
+    console.log(this.endDate)
     if (this.validateForm(form)) {
       const newEvent = new Event(
         null,  

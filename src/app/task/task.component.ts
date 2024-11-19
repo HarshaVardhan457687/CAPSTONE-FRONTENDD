@@ -22,14 +22,29 @@ export class TaskComponent implements OnInit {
   error: string | null = null; 
   eventId: string | null = null; 
   changedTasks: Set<Task> = new Set();
-  hasChanges: boolean = false;
+  hasChanges: boolean = false; 
+  selectedTask: any = null
 
   constructor(
     private taskService: TaskService,
     private eventService: EventService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {} 
+
+  showEditForm = false;
+
+  onTaskEdit(task: Task) { 
+    
+    this.selectedTask = task;
+    this.showEditForm = true; 
+    console.log(this.showEditForm)
+  }
+
+  closeEditForm() {
+    this.showEditForm = false;
+    this.selectedTask = null;
+  }
 
   ngOnInit(): void { 
     this.route.queryParams.subscribe(params => {
